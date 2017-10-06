@@ -12,13 +12,15 @@ btn.onclick = function(){
   // alert(document.getElementById('search-bar').value)
   var searcher = document.getElementById('search-bar').value;
   console.log(searcher)
-  fetch('https://www.googleapis.com/books/v1/volumes?q='+searcher)
+  fetch('https://www.googleapis.com/books/v1/volumes?q=' + searcher)
 .then(function (response){
     return response.json();
 })
 .then(function (json){
     console.log(json);
+    document.getElementById('results').append(`<li>${json.items[0].volumeInfo.authors[0]}</li>`)
 });
+
 }
 
   // let searcher = document.getElementById('search-bar').value;

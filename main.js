@@ -6,10 +6,20 @@ function showError(msg) {
 
 // Searches for books and returns a promise that resolves a JSON list
 function searchForBooks(term) {
+  
   // TODO
+  fetch('https://www.googleapis.com/books/v1/volumes?q=harry+potter')
+.then(function (response){
+    return response.json();
+})
+.then(function (json){
+    console.log(json);
+});
 }
 
 // Generate HTML and sets #results's contents to it
 function render() {
   // TODO
 }
+
+searchForBooks();

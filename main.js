@@ -21,7 +21,6 @@ btn.onclick = function(){
     console.log(json);
     var li = document.createElement("li");
     li.setAttribute("id","first")
-
     document.getElementById('results').appendChild(li)
     document.getElementById('first').append( `${json.items[0].volumeInfo.authors[0]}`)
 console.log(document.getElementById('results'))

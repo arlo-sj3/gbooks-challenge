@@ -6,6 +6,7 @@ function showError(msg) {
 
 // Searches for books and returns a promise that resolves a JSON list
 function searchForBooks(term) {
+  console.log(document.getElementById('results'))
 
   let btn = document.getElementById('search-btn');
 btn.onclick = function(){
@@ -18,7 +19,12 @@ btn.onclick = function(){
 })
 .then(function (json){
     console.log(json);
-    document.getElementById('results').append(`<li>${json.items[0].volumeInfo.authors[0]}</li>`)
+    var li = document.createElement("li");
+    li.setAttribute("id","first")
+
+    document.getElementById('results').appendChild(li)
+    document.getElementById('first').append( `${json.items[0].volumeInfo.authors[0]}`)
+console.log(document.getElementById('results'))
 });
 
 }

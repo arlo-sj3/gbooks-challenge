@@ -18,12 +18,19 @@ btn.onclick = function(){
     return response.json();
 })
 .then(function (json){
-    console.log(json);
+  for (var i = 0; i < json.items.length; i++) {
     var li = document.createElement("li");
-    li.setAttribute("id","first")
-    document.getElementById('results').appendChild(li)
-    document.getElementById('first').append( `${json.items[0].volumeInfo.authors[0]}`)
-console.log(document.getElementById('results'))
+    li.setAttribute("id",json.items[i].id);
+    document.getElementById('results').appendChild(li);
+    document.getElementById(json.items[i].id).append( `${json.items[i].volumeInfo.authors}`)
+    console.log(json.items[i].id)
+  }
+//     console.log(json);
+//     var li = document.createElement("li");
+//     li.setAttribute("id","first")
+//     document.getElementById('results').appendChild(li)
+//     document.getElementById('first').append( `${json.items[0].volumeInfo.authors[0]}`)
+// console.log(document.getElementById('results'))
 });
 
 }

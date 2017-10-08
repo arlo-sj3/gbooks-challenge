@@ -21,10 +21,20 @@ btn.onclick = function(){
   for (var i = 0; i < json.items.length; i++) {
     var li = document.createElement("li");
     li.setAttribute("id",json.items[i].id);
+    li.setAttribute("title",json.items[i].volumeInfo.title);
     document.getElementById('results').appendChild(li);
-    document.getElementById(json.items[i].id).append( `${json.items[i].volumeInfo.title}` + ', Written by: ' + `${json.items[i].volumeInfo.authors}`);
+    // document.getElementById(json.items[i].id).append( `${json.items[i].volumeInfo.title}` + ', Written by: ' + `${json.items[i].volumeInfo.authors}`);
     if(json.items[i].volumeInfo.imageLinks){
     document.getElementById(json.items[i].id).style.backgroundImage = `url("${json.items[i].volumeInfo.imageLinks.thumbnail}")`
+
+    // var tool = document.createElement("div");
+    // tool.setAttribute("class", "modal");
+    // tool.setAttribute("id","modal-id"+json.items[i].id)
+    // document.getElementById(json.items[i].id).appendChild(tool)
+    //
+    // document.getElementById(json.items[i].id).onclick(style.display = "block")
+    //
+
   }
 
     console.log(json.items[i].volumeInfo)

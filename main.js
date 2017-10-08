@@ -22,8 +22,9 @@ btn.onclick = function(){
     var li = document.createElement("li");
     li.setAttribute("id",json.items[i].id);
     document.getElementById('results').appendChild(li);
-    document.getElementById(json.items[i].id).append( `${json.items[i].volumeInfo.authors}`)
-    console.log(json.items[i].id)
+    document.getElementById(json.items[i].id).append( `${json.items[i].volumeInfo.title}` + ', Written by: ' + `${json.items[i].volumeInfo.authors}`);
+
+    console.log(json.items[i].volumeInfo)
   }
 //     console.log(json);
 //     var li = document.createElement("li");

@@ -23,6 +23,9 @@ btn.onclick = function(){
     li.setAttribute("id",json.items[i].id);
     document.getElementById('results').appendChild(li);
     document.getElementById(json.items[i].id).append( `${json.items[i].volumeInfo.title}` + ', Written by: ' + `${json.items[i].volumeInfo.authors}`);
+    if(json.items[i].volumeInfo.imageLinks){
+    document.getElementById(json.items[i].id).style.backgroundImage = `url("${json.items[i].volumeInfo.imageLinks.thumbnail}")`
+  }
 
     console.log(json.items[i].volumeInfo)
   }

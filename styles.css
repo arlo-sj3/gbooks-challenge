@@ -11,6 +11,7 @@ li{
   width: 19%;
   display: inline-grid;
   background-color: green;
+  background-size: cover;
   border-style: inset;
 }
 

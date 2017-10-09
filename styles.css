@@ -7,12 +7,18 @@ body{
 }
 
 li{
-  height: 35%;
+  height: 45%;
   width: 19%;
   display: inline-grid;
   background-color: green;
   background-size: cover;
   border-style: inset;
+  cursor: pointer;
+}
+
+li:hover {
+  border-style: dotted;
+  border-color: yellow;
 }
 
 #search-area{

@@ -16,6 +16,7 @@ btn.onclick = function(){
   fetch('https://www.googleapis.com/books/v1/volumes?q=' + searcher)
 .then(function (response){
     return response.json();
+
 })
 .then(function (json){
   for (var i = 0; i < json.items.length; i++) {
@@ -23,18 +24,10 @@ btn.onclick = function(){
     li.setAttribute("id",json.items[i].id);
     li.setAttribute("title",json.items[i].volumeInfo.title);
     document.getElementById('results').appendChild(li);
-    // document.getElementById(json.items[i].id).append( `${json.items[i].volumeInfo.title}` + ', Written by: ' + `${json.items[i].volumeInfo.authors}`);
     if(json.items[i].volumeInfo.imageLinks){
     document.getElementById(json.items[i].id).style.backgroundImage = `url("${json.items[i].volumeInfo.imageLinks.thumbnail}")`
-
-    // var tool = document.createElement("div");
-    // tool.setAttribute("class", "modal");
-    // tool.setAttribute("id","modal-id"+json.items[i].id)
-    // document.getElementById(json.items[i].id).appendChild(tool)
-    //
-    // document.getElementById(json.items[i].id).onclick(style.display = "block")
-    //
-
+  } else {
+    document.getElementById(json.items[i].id).append( `${json.items[i].volumeInfo.title}`)
   }
 
     console.log(json.items[i].volumeInfo)
@@ -67,3 +60,4 @@ function render() {
 }
 
 searchForBooks();
+render();

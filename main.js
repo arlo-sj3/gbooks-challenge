@@ -6,58 +6,49 @@ function showError(msg) {
 
 // Searches for books and returns a promise that resolves a JSON list
 function searchForBooks(term) {
-  console.log(document.getElementById('results'))
-
   let btn = document.getElementById('search-btn');
-btn.onclick = function(){
-  // alert(document.getElementById('search-bar').value)
-  var searcher = document.getElementById('search-bar').value;
-  console.log(searcher)
-  fetch('https://www.googleapis.com/books/v1/volumes?q=' + searcher)
-.then(function (response){
-    return response.json();
+  btn.onclick = function() {
+    var searcher = document.getElementById('search-bar').value;
+    fetch('https://www.googleapis.com/books/v1/volumes?q=' + searcher)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(json) {
+        for (var i = 0; i < json.items.length; i++) {
+          var li = document.createElement("li");
+          li.setAttribute("class", "book")
+          li.setAttribute("id", json.items[i].id);
+          li.setAttribute("title", json.items[i].volumeInfo.title);
+          document.getElementById('results').appendChild(li);
+          if (json.items[i].volumeInfo.imageLinks) {
+            document.getElementById(json.items[i].id).style.backgroundImage = `url("${json.items[i].volumeInfo.imageLinks.thumbnail}")`
+          } else {
+            document.getElementById(json.items[i].id).style.backgroundImage = `url("https://bookstore.uwo.ca/sites/all/themes/wrs/images/no-photo.png")`
+          }
 
-})
-.then(function (json){
-  for (var i = 0; i < json.items.length; i++) {
-    var li = document.createElement("li");
-    li.setAttribute("id",json.items[i].id);
-    li.setAttribute("title",json.items[i].volumeInfo.title);
-    document.getElementById('results').appendChild(li);
-    if(json.items[i].volumeInfo.imageLinks){
-    document.getElementById(json.items[i].id).style.backgroundImage = `url("${json.items[i].volumeInfo.imageLinks.thumbnail}")`
-  } else {
-    document.getElementById(json.items[i].id).append( `${json.items[i].volumeInfo.title}`)
+          var modal = document.createElement("div");
+          modal.setAttribute("id", "modal-" + json.items[i].id);
+          modal.setAttribute("class", "modal");
+          modal.setAttribute("style", "display: none");
+          document.getElementById(json.items[i].id).appendChild(modal);
+          var modalContent = document.createElement("span");
+          modalContent.setAttribute("id", "modalContent-" + json.items[i].id);
+          modalContent.setAttribute("class", "modalContent")
+          document.getElementById("modal-" + json.items[i].id).appendChild(modalContent)
+          document.getElementById("modalContent-" + json.items[i].id).innerHTML = (`${json.items[i].volumeInfo.title}` + "... Written By: " + `${json.items[i].volumeInfo.authors}` + "." + '<a href = "' + `${json.items[i].volumeInfo.previewLink}` + '"> CLICK FOR MORE INFO </a>');
+        }
+        var books = document.getElementsByClassName("book");
+        for (var i = 0; i < books.length; i++) {
+          books[i].addEventListener("click", function(event) {
+            var currentModal = event.target.querySelector(".modal");
+            currentModal.style.display = "block";
+            currentModal.addEventListener("click", function(event) {
+              currentModal.style.display = "none";
+            })
+          })
+        }
+      });
   }
-
-    console.log(json.items[i].volumeInfo)
-  }
-//     console.log(json);
-//     var li = document.createElement("li");
-//     li.setAttribute("id","first")
-//     document.getElementById('results').appendChild(li)
-//     document.getElementById('first').append( `${json.items[0].volumeInfo.authors[0]}`)
-// console.log(document.getElementById('results'))
-});
-
-}
-
-  // let searcher = document.getElementById('search-bar').value;
-  // console.log(searcher)
-  // TODO
-//   fetch('https://www.googleapis.com/books/v1/volumes?q=harry+potter')
-// .then(function (response){
-//     return response.json();
-// })
-// .then(function (json){
-//     console.log(json);
-// });
-}
-
-// Generate HTML and sets #results's contents to it
-function render() {
-  // TODO
 }
 
 searchForBooks();
-render();
